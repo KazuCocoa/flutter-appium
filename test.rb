@@ -9,7 +9,6 @@ IOS_OPS = {
     deviceName: 'iPhone Simulator',
     useNewWDA: true,
     useJSONSource: true,
-    someCapability: 'some_capability'
   },
   appium_lib: {
     export_session: true,
@@ -19,7 +18,32 @@ IOS_OPS = {
   }
 }.freeze
 
+ANDROID_OPS = {
+    caps: {
+        platformName: :android,
+        automationName: 'uiautomator2',
+        app: 'android/app-debug.apk',
+        platformVersion: '8.1.0',
+        deviceName: 'Android Emulator',
+        appPackage: 'com.example.myflutterapp',
+        unicodeKeyboard: true,
+        resetKeyboard: true
+    },
+    appium_lib: {
+        export_session: true,
+        wait: 30,
+        wait_timeout: 20,
+        wait_interval: 1
+    }
+}.freeze
 
+
+# Android
+# core ||= ::Appium::Core.for(self, ANDROID_OPS)
+# driver ||= core.start_driver
+# element = driver.find_element :class, "android.widget.EditText"
+
+# iOS
 core ||= ::Appium::Core.for(self, IOS_OPS)
 driver ||= core.start_driver
 
