@@ -37,32 +37,53 @@ ANDROID_OPS = {
     }
 }.freeze
 
-
 # Android
-# core ||= ::Appium::Core.for(self, ANDROID_OPS)
-# driver ||= core.start_driver
-# element = driver.find_element :class, "android.widget.EditText"
+def run_android_test
+  core ||= ::Appium::Core.for(self, ANDROID_OPS)
+  driver ||= core.start_driver
+  sleep 3
+
+  elements = driver.find_elements :class, "Flutter"
+  unless elements.size == 3 && elements[1].text == "FriendlyChat"
+    puts "fail"
+    return
+  end
+
+  element = driver.find_element :class, "android.widget.EditText"
+  unless element.text == "Send a message"
+    puts "fail"
+    return
+  end
+
+  puts "finish in run_android_test"
+end
 
 # iOS
-core ||= ::Appium::Core.for(self, IOS_OPS)
-driver ||= core.start_driver
+def run_ios_test
+  core ||= ::Appium::Core.for(self, IOS_OPS)
+  driver ||= core.start_driver
 
-driver.find_element :name, "0"
+  driver.find_element :name, "0"
 
-b = driver.find_element :name, "Increment"
-b.click
+  b = driver.find_element :name, "Increment"
+  b.click
 
-element = driver.find_element :name, "1"
-unless element.name == "1"
-  puts "fail"
-  return
+  element = driver.find_element :name, "1"
+  unless element.name == "1"
+    puts "fail"
+    return
+  end
+
+  b.click
+  element = driver.find_element :name, "2"
+  unless element.name == "2"
+    puts "fail"
+    return
+  end
+
+  puts "finish in run_ios_test"
 end
 
-b.click
-element = driver.find_element :name, "2"
-unless element.name == "2"
-  puts "fail"
-  return
-end
-
-puts "finish"
+# Run Android sample test and iOS test
+run_android_test
+run_ios_test
