@@ -28,7 +28,6 @@ app: https://github.com/KazuCocoa/my_flutter_app
 
 ```bash
 $ npm install -g appium
-$ appium
 ```
 
 ## Ruby
