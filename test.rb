@@ -39,7 +39,7 @@ ANDROID_OPS = {
 
 # Android
 def run_android_test
-  core ||= ::Appium::Core.for(self, ANDROID_OPS)
+  core ||= ::Appium::Core.for(ANDROID_OPS)
   driver ||= core.start_driver
   sleep 3
 

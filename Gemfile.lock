@@ -1,9 +1,9 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    appium_lib_core (1.7.1)
+    appium_lib_core (2.0.0)
       faye-websocket (~> 0.10.0)
-      selenium-webdriver (~> 3.5)
+      selenium-webdriver (~> 3.14)
     childprocess (0.9.0)
       ffi (~> 1.0, >= 1.0.11)
     eventmachine (1.2.7)
@@ -12,7 +12,7 @@ GEM
       websocket-driver (>= 0.5.1)
     ffi (1.9.25)
     rubyzip (1.2.1)
-    selenium-webdriver (3.12.0)
+    selenium-webdriver (3.14.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.2)
     websocket-driver (0.7.0)
@@ -23,7 +23,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  appium_lib_core
+  appium_lib_core (~> 2.0)
 
 BUNDLED WITH
-   1.14.3
+   1.16.3
