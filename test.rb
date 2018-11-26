@@ -1,7 +1,7 @@
 require 'appium_lib_core'
 
 IOS_OPS = {
-  caps: {
+    desired_capabilities: {
     platformName: :ios,
     automationName: 'XCUITest',
     app: 'ios/iphonesimulator/Runner.app',
@@ -19,28 +19,27 @@ IOS_OPS = {
 }.freeze
 
 ANDROID_OPS = {
-    caps: {
-        platformName: :android,
-        automationName: 'uiautomator2',
-        app: 'android/app-debug.apk',
-        platformVersion: '8.1.0',
-        deviceName: 'Android Emulator',
-        appPackage: 'com.example.myflutterapp',
-        unicodeKeyboard: true,
-        resetKeyboard: true
-    },
-    appium_lib: {
-        export_session: true,
-        wait: 30,
-        wait_timeout: 20,
-        wait_interval: 1
-    }
+  desired_capabilities: {
+    platformName: :android,
+    automationName: 'uiautomator2',
+    app: 'android/app-debug.apk',
+    platformVersion: '8.1.0',
+    deviceName: 'Android Emulator',
+    appPackage: 'com.example.myflutterapp',
+    unicodeKeyboard: true,
+    resetKeyboard: true
+  },
+  appium_lib: {
+    export_session: true,
+    wait: 30,
+    wait_timeout: 20,
+    wait_interval: 1
+  }
 }.freeze
 
 # Android
 def run_android_test
-  core ||= ::Appium::Core.for(ANDROID_OPS)
-  driver ||= core.start_driver
+  driver = ::Appium::Core.for(ANDROID_OPS).start_driver
   sleep 3
 
   elements = driver.find_elements :class, "Flutter"
@@ -60,8 +59,7 @@ end
 
 # iOS
 def run_ios_test
-  core ||= ::Appium::Core.for(self, IOS_OPS)
-  driver ||= core.start_driver
+  driver = ::Appium::Core.for(IOS_OPS).start_driver
 
   driver.find_element :name, "0"
 
