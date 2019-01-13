@@ -21,16 +21,14 @@ IOS_OPS = {
 ANDROID_OPS = {
   desired_capabilities: {
     platformName: :android,
-    automationName: 'uiautomator2',
+    automationName: 'uiautomator2', # failed to launch with espresso driver...
     app: 'android/app-debug.apk',
-    platformVersion: '8.1.0',
     deviceName: 'Android Emulator',
-    appPackage: 'com.example.myflutterapp',
+    appPackage: 'com.example.myflutterapp2',
     unicodeKeyboard: true,
     resetKeyboard: true
   },
   appium_lib: {
-    export_session: true,
     wait: 30,
     wait_timeout: 20,
     wait_interval: 1
@@ -39,18 +37,25 @@ ANDROID_OPS = {
 
 # Android
 def run_android_test
-  driver = ::Appium::Core.for(ANDROID_OPS).start_driver
-  sleep 3
+  core = Appium::Core.for ANDROID_OPS
+  driver = core.start_driver
 
-  elements = driver.find_elements :class, "Flutter"
-  unless elements.size == 3 && elements[1].text == "FriendlyChat"
-    puts "fail"
+  e_number = driver.find_element :xpath, '//android.view.View[@text="0"]'
+
+  element_increment = driver.find_element :class, 'android.widget.Button'
+  element_increment.text == 'Increment'
+
+  element_increment.click
+  core.wait_true { e_number.text == '1' }
+  unless e_number.text == '1'
+    raise 'fail'
     return
   end
 
-  element = driver.find_element :class, "android.widget.EditText"
-  unless element.text == "Send a message"
-    puts "fail"
+  element_increment.click
+  core.wait_true { e_number.text == '2' }
+  unless e_number.text == '2'
+    raise 'fail'
     return
   end
 
@@ -59,23 +64,24 @@ end
 
 # iOS
 def run_ios_test
-  driver = ::Appium::Core.for(IOS_OPS).start_driver
+  core = Appium::Core.for IOS_OPS
+  driver = core.start_driver
 
-  driver.find_element :name, "0"
+  driver.find_element :name, '0'
 
-  b = driver.find_element :name, "Increment"
-  b.click
+  element_increment = driver.find_element :name, "Increment"
 
-  element = driver.find_element :name, "1"
-  unless element.name == "1"
-    puts "fail"
+  element_increment.click
+  e = driver.find_element :name, '1'
+  unless e.text == '1'
+    raise 'fail'
     return
   end
 
-  b.click
-  element = driver.find_element :name, "2"
-  unless element.name == "2"
-    puts "fail"
+  element_increment.click
+  e = driver.find_element :name, '2'
+  unless e.text == '2'
+    raise 'fail'
     return
   end
 
