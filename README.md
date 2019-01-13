@@ -1,6 +1,6 @@
 # This repository
 
-This repository is for Flutter 1.x, mainly. Has not tested against Flutter 2.x
+This repository is for Flutter 1.0. Test apps are https://github.com/KazuCocoa/my_flutter_app2.
 
 This repository is for https://kazucocoa.wordpress.com/2018/02/28/flutterflutter-app-with-appium/ . This is really experimental and showcase.
 
