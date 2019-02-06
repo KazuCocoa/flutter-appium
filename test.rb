@@ -12,7 +12,6 @@ IOS_OPS = {
   },
   appium_lib: {
     export_session: true,
-    wait: 30,
     wait_timeout: 20,
     wait_interval: 1
   }
@@ -29,7 +28,6 @@ ANDROID_OPS = {
     resetKeyboard: true
   },
   appium_lib: {
-    wait: 30,
     wait_timeout: 20,
     wait_interval: 1
   }
@@ -40,7 +38,7 @@ def run_android_test
   core = Appium::Core.for ANDROID_OPS
   driver = core.start_driver
 
-  e_number = driver.find_element :xpath, '//android.view.View[@text="0"]'
+  e_number = core.wait { driver.find_element :xpath, '//android.view.View[@text="0"]' }
 
   element_increment = driver.find_element :class, 'android.widget.Button'
   element_increment.text == 'Increment'
