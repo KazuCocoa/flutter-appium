@@ -1,1 +1,3 @@
-
+workflow "test" {
+  on = "push"
+}
