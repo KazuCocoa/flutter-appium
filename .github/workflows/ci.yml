@@ -1,7 +1,4 @@
-on:
-  push:
-    branches:
-    - master
+on: [push]
 
 name: Run Appium
 jobs:
@@ -15,12 +12,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-
     - name: Use Node.js ${{ matrix.node_version }}
       uses: actions/setup-node@v1
       with:
         version: ${{ matrix.node_version }}
-    
     - name: install appium
       run: |
         npm install -g appium
