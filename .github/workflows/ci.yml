@@ -20,4 +20,6 @@ jobs:
     - name: install appium
       run: |
         npm install -g appium
+    - name: Run appium
+      run: appium --salaxed-security
 
